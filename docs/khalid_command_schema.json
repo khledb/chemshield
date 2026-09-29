@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChemShield Secure Command Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "command_id",
+    "event_id",
+    "timestamp_utc",
+    "nonce",
+    "sequence_number",
+    "user_role",
+    "action",
+    "reagent",
+    "volume_ml",
+    "flow_ml_min",
+    "mixing_time_s",
+    "recovery_plan_hash",
+    "hmac_sha256"
+  ],
+  "properties": {
+    "session_id": {"type": "string"},
+    "command_id": {"type": "string"},
+    "event_id": {"type": "string"},
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "nonce": {"type": "string"},
+    "sequence_number": {"type": "integer", "minimum": 1},
+    "user_role": {"type": "string", "enum": ["operator", "engineer", "supervisor"]},
+    "action": {"type": "string", "enum": ["DOSE", "RECOVERY_DOSE", "HOLD"]},
+    "reagent": {"type": "string", "enum": ["acid", "base", "none"]},
+    "volume_ml": {"type": "number", "minimum": 0, "maximum": 20},
+    "flow_ml_min": {"type": "number", "minimum": 0, "maximum": 500},
+    "mixing_time_s": {"type": "number", "minimum": 15},
+    "recovery_plan_hash": {"type": "string"},
+    "hmac_sha256": {"type": "string"}
+  }
+}
